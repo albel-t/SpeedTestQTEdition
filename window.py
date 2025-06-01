@@ -56,10 +56,17 @@ class Ui_Dialog(object):
         result_dialog = QtWidgets.QMessageBox()
         result_dialog.setWindowTitle("Результаты тестирования")
         
-        read_speed, write_speed = 0, 0
-        message = f"Скорость чтения: {read_speed}\nСкорость записи: {write_speed}\n!Это приложение предназначено для linux!"
+        read_speed, write_speed = measure_flash_speed_generate("D:\\")
+        message = f"Скорость чтения: {read_speed:.2f}\nСкорость записи: {write_speed:.2f}"
         
         result_dialog.setText(message)
+        
+        error_dialog = QtWidgets.QMessageBox()
+        error_dialog.setWindowTitle("Обнаружено несоответствие")
+        error_dialog.setIcon(QtWidgets.QMessageBox.Icon.Critical)  
+        error_dialog.setText("Данные могут быть некоректные!")
+        error_dialog.setInformativeText("Это приложение предназначено для linux, на этой ОС может работать некорректно.")
+        error_dialog.exec()
         result_dialog.exec()
 
 
