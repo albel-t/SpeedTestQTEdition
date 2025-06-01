@@ -1,6 +1,6 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
-from SpeedTest.path import find_flash_drive_w
-from SpeedTest.test import measure_flash_speed_generate
+from path import find_flash_drive_w
+from test import measure_flash_speed_generate
 
 
 class Ui_Dialog(object):
