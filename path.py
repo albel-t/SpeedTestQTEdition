@@ -29,3 +29,4 @@ def find_flash_drive_w(user = "alexander_"):
                     print(f"Диск {disk} пуст.")
             except Exception as e:
                 print(f"Ошибка при работе с диском {disk}: {e}")
+    return great_disks
