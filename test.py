@@ -76,14 +76,6 @@ def measure_flash_speed_generate(flash_path, file_size_mb = 5):
     print(f"flash_path {flash_path}; file_size_mb{file_size_mb}")
     print(f"Тестируем: {flash_path}")
     print("----------------------------------------")
-
-        # Проверка прав
-    if os.geteuid() != 0:
-        print("\nОШИБКА: Скрипт требует root-прав для очистки кеша!")
-        print("Запустите через sudo:")
-        print("Запустите терминал (Ctrl+Alt+T) и вставьте команду:")
-        print(f"sudo python3 {str(__file__)[0:-7]}"+"window.py")
-        exit(1)
         
     try:
         results = measure_flash_speed(flash_path, 5)

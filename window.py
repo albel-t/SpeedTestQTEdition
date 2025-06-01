@@ -1,7 +1,8 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
+from PyQt6.QtWidgets import (QApplication, QMainWindow, QVBoxLayout, QHBoxLayout, QWidget,
+QLineEdit, QPushButton, QLabel, QTextEdit, QCheckBox, QDialog, QRadioButton, QButtonGroup, QDialogButtonBox,QGroupBox)
 from path import find_flash_drive_w
 from test import measure_flash_speed_generate
-
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
@@ -29,7 +30,6 @@ class Ui_Dialog(object):
         self.buttonBox.accepted.connect(Dialog.accept) # type: ignore
         self.buttonBox.rejected.connect(Dialog.reject) # type: ignore
         
-        # Подключаем кнопки к функциям
         self.pushButton.clicked.connect(self.on_detection_clicked)
         self.pushButton_2.clicked.connect(self.on_monitoring_clicked)
         
@@ -42,35 +42,22 @@ class Ui_Dialog(object):
         self.pushButton_2.setText(_translate("Dialog", "Мониторинг"))
 
     def on_detection_clicked(self):
-        """Обработчик кнопки 'Обнаружение'"""
         input_text = self.lineEdit.text()
         result = find_flash_drive_w(input_text)
         
-        # Очищаем комбобокс перед добавлением новых элементов
         self.comboBox.clear()
         
-        # Добавляем результат в выпадающий список
-        if isinstance(result, list):
+        if isinstance(result, list): 
             self.comboBox.addItems(result)
         else:
             self.comboBox.addItem(str(result))
 
     def on_monitoring_clicked(self):
-        """Обработчик кнопки 'Мониторинг'"""
-        selected_item = self.comboBox.currentText()
-        
-        # Вызываем функцию измерения скорости
-        speed_result = measure_flash_speed_generate(selected_item)
-        
-        # Создаем и показываем окно с результатами
         result_dialog = QtWidgets.QMessageBox()
         result_dialog.setWindowTitle("Результаты тестирования")
         
-        if isinstance(speed_result, tuple) and len(speed_result) >= 2:
-            read_speed, write_speed = speed_result[:2]
-            message = f"Скорость чтения: {read_speed}\nСкорость записи: {write_speed}"
-        else:
-            message = str(speed_result)
+        read_speed, write_speed = 0, 0
+        message = f"Скорость чтения: {read_speed}\nСкорость записи: {write_speed}\n!Это приложение предназначено для linux!"
         
         result_dialog.setText(message)
         result_dialog.exec()

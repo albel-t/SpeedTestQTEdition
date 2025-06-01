@@ -18,15 +18,6 @@ def find_flash_drive_w(user = "alexander_"):
     great_disks = []
     for disk in disks:
         if disk != "C":
-            try:
-                files_and_folders = os.listdir(disk + ":\\")
-                if len(files_and_folders) > 0:
-                    print(f"Найдена флешка на диске {disk}:")
-                    for item in files_and_folders:
-                        great_disks.append(item)
-                        print(item)
-                else:
-                    print(f"Диск {disk} пуст.")
-            except Exception as e:
-                print(f"Ошибка при работе с диском {disk}: {e}")
+            great_disks.append(disk+":\\")
+            print(disk)
     return great_disks
