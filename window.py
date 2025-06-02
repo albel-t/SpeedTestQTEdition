@@ -56,7 +56,7 @@ class Ui_Dialog(object):
         result_dialog = QtWidgets.QMessageBox()
         result_dialog.setWindowTitle("Результаты тестирования")
         
-        read_speed, write_speed = measure_flash_speed_generate("D:\\")
+        read_speed, write_speed = measure_flash_speed_generate(self.comboBox.currentText())
         message = f"Скорость чтения: {read_speed:.2f}\nСкорость записи: {write_speed:.2f}"
         
         result_dialog.setText(message)
